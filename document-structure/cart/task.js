@@ -21,7 +21,7 @@ products.forEach(product => {
 
     if (currentProductInCart) {
       let countProduct = currentProductInCart.querySelector('.cart__product-count')
-      countProduct.textContent = count.textContent
+      countProduct.textContent = +count.textContent + +currentProductInCart.textContent
     } else {
       let cartProduct = document.createElement('div')
       cartProduct.classList.add('cart__product')

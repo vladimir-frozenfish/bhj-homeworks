@@ -1,20 +1,28 @@
 let links = document.querySelectorAll('.has-tooltip')
-let toolTips = []
+let body = document.querySelector('body')
+// let toolTips = []
+let currentTooltip = ''
+
+let toolTip = document.createElement('div')
+toolTip.classList.add('tooltip')
+
+body.appendChild(toolTip)
 
 
 links.forEach((link) => {
-  let toolTip = document.createElement('div')
-  toolTip.textContent = link.getAttribute('title')
-  toolTip.classList.add('tooltip')
-  
-  link.appendChild(toolTip)
-
-  toolTips.push(toolTip)
-
   link.addEventListener('click', (e) => {
     e.preventDefault()
+    let {left, bottom} = link.getBoundingClientRect()
 
-    toolTips.forEach(elem => elem.classList.remove('tooltip_active'))
-    toolTip.classList.add('tooltip_active')
+    if (link.getAttribute('title') === currentTooltip) {
+      toolTip.classList.toggle('tooltip_active')
+    } else {
+      toolTip.classList.add('tooltip_active')
+      toolTip.textContent = link.getAttribute('title')
+      toolTip.style.top = bottom + 'px'
+      toolTip.style.left = left + 'px'
+    }
+
+    currentTooltip = link.getAttribute('title')
   })
 })
