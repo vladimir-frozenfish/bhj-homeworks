@@ -26,8 +26,6 @@ async function getData() {
       const response = await fetch('https://students.netoservices.ru/nestjs-backend/slow-get-courses')
       data = await response.json()
       loader.classList.remove('loader_active')
-      console.log(data)
-      console.log(Object.values(data.response.Valute))
       render(Object.values(data.response.Valute))
     } catch (e) {
       throw e
